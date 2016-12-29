@@ -1,12 +1,39 @@
 console.log(React);
 console.log(ReactDOM);
 
+var my_news= [
+	{
+		author : 'Keith Flint',
+		text : 'Smack my bitch up'
+	},
+	{
+		author : 'Kurt Cobain',
+		text : 'I know a dirty word'
+	}
+];
+
+console.log(my_news);
+
 var News = React.createClass({
 	render: function() {
-		return (
-			<div className="news">
-			К сожалению, новостей нет.
+		var data = this.props.data;
+		var newsTemplate = data.map(function(item,index) {
+			return (
+			<div key={index}>
+				<p className="news__author">{item.author}:</p>
+				<p className="news__text">{item.text}</p>
 			</div>
+		)
+	});
+
+	console.log(newsTemplate);
+
+	return (
+		<div className="news">
+			{newsTemplate}
+		</div>
+
+
 		);
 	}
 });
@@ -26,7 +53,7 @@ var App = React.createClass({
 		return (
 			<div className="app">
 			Всем привет, я компонент App! Я умею отображать новости
-			<News />
+			<News data={my_news} />
 			<Comments />
 			</div>
 			);
